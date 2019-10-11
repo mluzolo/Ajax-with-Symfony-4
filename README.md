@@ -170,4 +170,4 @@ $.ajax({
 
 # Result
 
-
+![Capture](https://github.com/mluzolo/Ajax-with-Symfony-4/blob/master/Capture%20d%E2%80%99e%CC%81cran%202019-10-11%20a%CC%80%2014.16.59.png?raw=true)
