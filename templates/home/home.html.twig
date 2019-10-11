@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {% endblock %}
+
+{% block body %}
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css"/>
+    <div class="container">
+        <div class='titre'>
+
+            <h3>Form for entering a nickname</h3>
+
+        </div>
+
+
+        <br>
+        {{ form_start(nouveauPseudo) }}   
+
+
+        {{ form_widget(nouveauPseudo.pseudo) }}
+        <br>
+        {{ form_widget(nouveauPseudo.submit) }}
+
+        {{form_end (nouveauPseudo)}}
+
+<pre>
+Here is the list of pseudos inserted in the database via the form.
+It is via ajax that the list is updated.
+        </pre>
+    </div>
+        
+    <div class="container">
+
+        <table class="table Pseudo">
+
+            <th>Pseudos</th>
+
+
+        </table>
+
+    </div>
+
+{% endblock %}
+
+
+
+{% block javascripts %} 
+
+    <script language = "javascript" src = "https://code.jquery.com/jquery-2.2.4.min.js"></script> 
+
+    <script language = "javascript">
+
+        $(document).ready(function () {
+
+//form reset 
+$("input:text").val(""); // empty the input field after validation of the form
+// Tip: the $pseudo property must accept a null value
+
+//ajax treatment
+            $.ajax({
+
+                url: '{{ path('ajax') }}',
+                type: 'POST',
+                dataType: 'json',
+
+                async: true,
+
+                success: function (data) {
+
+                    console.log(data);
+                    for (i = 0; i < data.length; i++)
+                    {
+                        $('.Pseudo').append('<tr><td>' + data[i].pseudo + '</td></tr>'); // Filling in the lines of the table
+
+                        
+
+                    }
+                }
+
+
+            });
+
+
+
+
+        });
+
+  
+    </script> 
+
+{% endblock %}
